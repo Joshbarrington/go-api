@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"go-api/httpd/handler"
 	"go-api/httpd/routes"
 	"go-api/internal/db"
@@ -9,16 +10,17 @@ import (
 )
 
 const dbName = "userdb"
-const collectionName = "users"
+const collectionName = "people"
 
 func main() {
-
+	fmt.Println(dbName + " " + collectionName)
 	collection, _ := db.GetMongoDbCollection(dbName, collectionName)
 
 	r := gin.Default()
 
 	r.POST("/user", handler.UserPost(collection))
 	r.GET("/user/:id", handler.GetUser(collection))
+	r.GET("/users", handler.Users(collection))
 
 	r := routes.SetupRouter(collection)
 
