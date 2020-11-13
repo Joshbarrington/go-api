@@ -30,7 +30,7 @@ func GetUser(collection *mongo.Collection, id int) (bson.M, error) {
 
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			log.Printf("found document %v", result)
+			log.Printf("No users found: %v", result)
 			return result, err
 		}
 		log.Fatal(err)
