@@ -10,7 +10,7 @@ import (
 
 func UserPost(m *mongo.Collection) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		vdar user model.User
+		var user model.User
 		c.Bind(&user)
 		fmt.Println(user)
 	}
