@@ -33,8 +33,10 @@ func AddUser(collection *mongo.Collection, user model.User) {
 func GetUser(collection *mongo.Collection, id int) (bson.M, error) {
 	var result bson.M
 
-	err := collection.FindOne(context.Background(),
-		bson.D{{}}).Decode(&result)
+	err := collection.FindOne(context.TODO(), bson.D{{"_id", id}}).Decode(&result)
+
+	// err := collection.FindOne(context.Background(),
+	// 	bson.D{{}}).Decode(&result)
 
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
