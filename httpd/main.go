@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
 	"go-api/httpd/handler"
 	"go-api/internal/db"
+
+	"github.com/gin-gonic/gin"
 )
 
 const dbName = "userdb"
@@ -16,6 +17,7 @@ func main() {
 	r := gin.Default()
 
 	r.POST("/user", handler.UserPost(collection))
+	r.GET("/user/:id", handler.GetUser(collection))
 
 	r.Run()
 }
