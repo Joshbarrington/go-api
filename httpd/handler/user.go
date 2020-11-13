@@ -1,15 +1,17 @@
 package handler
 
 import (
-	"net/http"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
+	"go-api/internal/model"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func UserGet() gin.HandlerFunc {
+func UserPost(m *mongo.Collection) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.JSON(http.StatusOK, map[string]string{
-			"user": "test",
-		})
+		vdar user model.User
+		c.Bind(&user)
+		fmt.Println(user)
 	}
 }
