@@ -67,10 +67,7 @@ func TestUserGet(t *testing.T) {
 	fmt.Println(resp.Header.Get("Content-Type"))
 
 	assert.Equal(t, 200, w.Code)
-
-
 }
-
 
 func TestUsers(t *testing.T) {
 
@@ -88,6 +85,4 @@ func TestUsers(t *testing.T) {
 	fmt.Println(resp.Header.Get("Content-Type"))
 
 	assert.Equal(t, 200, w.Code)
-
-
 }
