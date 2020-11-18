@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"go-api/httpd/handler"
+	"log"
+
+	"go-api/httpd/routes"
 	"go-api/internal/db"
 )
 
@@ -13,9 +14,9 @@ func main() {
 
 	collection, _ := db.GetMongoDbCollection(dbName, collectionName)
 
-	r := gin.Default()
+	log.Printf("[MongoDb] Database: %s", dbName)
+	log.Printf("[MongoDb] Collection: %s", collectionName)
 
-	r.POST("/user", handler.UserPost(collection))
-
+	r := routes.SetupRouter(collection)
 	r.Run()
 }
