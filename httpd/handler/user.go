@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"log"
+	"fmt"
 	"strconv"
 
 	"go-api/internal/db"
@@ -43,6 +43,7 @@ func GetUser(m *mongo.Collection) gin.HandlerFunc {
 
 		id, err := strconv.Atoi(c.Param("id"))
 
+<<<<<<< HEAD
 		if err != nil {
 			log.Print(err)
 			c.JSON(400, gin.H{"error": gin.H{"code": 400, "message": "bad request path field(s)"}})		
@@ -56,6 +57,19 @@ func GetUser(m *mongo.Collection) gin.HandlerFunc {
 			return
 		}
 
+=======
+		if err != nil {
+			c.JSON(404, err)
+		}
+
+		result, err := db.GetUser(m, id)
+
+		if err != nil {
+			c.JSON(404, err)
+			return
+		}
+
+>>>>>>> 51efb45... Added AllUsers. Attempted to add GetUser{id}
 		c.JSON(200, result)
 	}
 }
