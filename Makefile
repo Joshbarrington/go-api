@@ -10,15 +10,15 @@ TIMESTAMP := $$(date "+%Y-%m-%d %H:%M:%S")#
 #
 # Go targets
 #
-dev:
-	@printf "$(TIMESTAMP) $(YEL)Running Go dev server...$(NC)\n"
-	go run httpd/main.go
+lint:
+	@printf "$(TIMESTAMP) $(YEL)Running Go formatting and linting...$(NC)\n"
+	go fmt ./...
+	-e golint ./...
 
 run-tests:
 	@printf "$(TIMESTAMP) $(YEL)Running Go tests...$(NC)\n"
 	cd test && go test
 
-lint:
-	@printf "$(TIMESTAMP) $(YEL)Running Go formatting and linting...$(NC)\n"
-	go fmt ./...
-	golint ./...
+dev:
+	@printf "$(TIMESTAMP) $(YEL)Running Go dev server...$(NC)\n"
+	go run httpd/main.go
