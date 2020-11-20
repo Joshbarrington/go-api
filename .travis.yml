@@ -1,12 +1,5 @@
-language: python
-
-python:
-  - "3.6"
-
 services:
   - docker
-
-install: pip install docker-compose
 
 script:
   - docker-compose run api sh -c 'make run-tests'
