@@ -21,9 +21,9 @@ const collectionName = "users"
 var collection, _ = db.GetMongoDbCollection(dbName, collectionName)
 var router = routes.SetupRouter(collection)
 
-func TestUserPost(t *testing.T) {
+func testUserPost(t *testing.T) {
 
-	testJson, err := json.Marshal(map[string]string{
+	testJSON, err := json.Marshal(map[string]string{
 		"username":  "test",
 		"firstname": "test",
 		"lastname":  "test",
@@ -35,7 +35,7 @@ func TestUserPost(t *testing.T) {
 	}
 
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("POST", "/user", bytes.NewBuffer(testJson))
+	req, _ := http.NewRequest("POST", "/user", bytes.NewBuffer(testJSON))
 	req.Header.Set("Content-type", "application/json")
 
 	router.ServeHTTP(w, req)
