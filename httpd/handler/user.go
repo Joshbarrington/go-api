@@ -25,6 +25,7 @@ func UserPost(collection *mongo.Collection) gin.HandlerFunc {
 		result, err := db.AddUser(collection, user)
 
 		if err != nil {
+			log.Print(err)
 			c.JSON(500, gin.H{"error": gin.H{"code": 500, "message": "user unsuccesfully added"}})
 			return
 		}
