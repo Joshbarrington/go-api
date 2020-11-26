@@ -5,7 +5,7 @@ services:
     build:
       context: .
     ports:
-      - '27017:27017'
+      - 8080:8080
     volumes:
       - ./httpd:/httpd
       - ./internal:/internal
@@ -16,3 +16,5 @@ services:
 
   db:
     image: mongo
+    ports:
+      - 27017:27017
