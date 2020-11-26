@@ -3,6 +3,8 @@ package routes
 import (
 	"bytes"
 	"encoding/json"
+
+	"io/ioutil"
 	"log"
 	"net/http"
 	"net/http/httptest"
@@ -52,11 +54,13 @@ func TestUserPost(t *testing.T) {
 
 	writer, resp := testHttpRequest(collection, testJSON)
 	err = json.NewDecoder(resp.Body).Decode(&respJSON)
-
 	if err != nil {
 		log.Println(err)
 	}
 
+	body, _ := ioutil.ReadAll(resp.Body)
+	log.Printf("[Response] status code: %d", writer.Code)
+	log.Printf("[Response] contents: %s", string(body))
 	log.Printf("[Response] respJSON struct contents: %s", respJSON)
 
 	assert.Equal(t, 200, writer.Code)
