@@ -17,7 +17,7 @@ lint:
 
 run-tests:
 	@printf "$(TIMESTAMP) $(YEL)Running Go tests...$(NC)\n"
-	cd test && go test
+	cd httpd/routes && go test
 
 dev:
 	@printf "$(TIMESTAMP) $(YEL)Running Go dev server...$(NC)\n"

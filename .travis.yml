@@ -5,4 +5,4 @@ services:
   - docker
 
 script:
-  - docker-compose run api sh -c 'cd test && go test'
+  - docker-compose run api sh -c 'cd httpd/routes && go test'

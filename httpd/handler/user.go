@@ -3,9 +3,10 @@ package handler
 import (
 	"log"
 
-	"github.com/gin-gonic/gin"
 	"go-api/internal/db"
 	"go-api/internal/model"
+
+	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -17,7 +18,7 @@ func UserPost(collection *mongo.Collection) gin.HandlerFunc {
 
 		if err := c.Bind(&user); err != nil {
 			log.Print(err)
-			c.JSON(400, gin.H{"error": gin.H{"code": 400, "message": "missing required field(s)"}})
+			c.JSON(400, gin.H{"error": gin.H{"code": 400, "message": "invalid field(s)"}})
 			return
 		}
 
