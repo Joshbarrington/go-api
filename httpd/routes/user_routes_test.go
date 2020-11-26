@@ -53,6 +53,12 @@ func TestUserPost(t *testing.T) {
 	writer, resp := testHttpRequest(collection, testJSON)
 	err = json.NewDecoder(resp.Body).Decode(&respJSON)
 
+	if err != nil {
+		log.Println(err)
+	}
+
+	log.Printf("[Response] respJSON struct contents: %s", respJSON)
+
 	assert.Equal(t, 200, writer.Code)
 	assert.NotEmpty(t, respJSON.ID)
 }
