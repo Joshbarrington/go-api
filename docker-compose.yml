@@ -4,6 +4,7 @@ services:
   api:
     build:
       context: .
+    container_name: go-api-c
     ports:
       - 8080:8080
     volumes:
@@ -16,5 +17,6 @@ services:
 
   db:
     image: mongo
+    container_name: mongodb-c
     ports:
       - 27017:27017
