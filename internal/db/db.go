@@ -9,7 +9,9 @@ import (
 )
 
 func MongoDbConnection() (*mongo.Client, error) {
-	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI("mongodb://0.0.0.0:27017"))
+
+	client, err := mongo.Connect(context.Background(),
+		options.Client().SetDirect(true).ApplyURI("mongodb://db:27017"))
 
 	if err != nil {
 		log.Fatal(err)
