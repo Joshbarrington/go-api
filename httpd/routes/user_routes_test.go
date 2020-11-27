@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 
-	"io/ioutil"
 	"log"
 	"net/http"
 	"net/http/httptest"
@@ -53,16 +52,13 @@ func TestUserPost(t *testing.T) {
 	}
 
 	writer, resp := testHttpRequest(collection, testJSON)
-	body, _ := ioutil.ReadAll(resp.Body)
-
-	log.Printf("[Response] status code: %d", writer.Code)
-	log.Printf("[Response] contents: %s", string(body))
-
 	err = json.NewDecoder(resp.Body).Decode(&respJSON)
 
 	if err != nil {
 		log.Println(err)
 	}
+
+	log.Printf("[Response] id: %s", respJSON.ID)
 
 	assert.Equal(t, 200, writer.Code)
 	assert.NotEmpty(t, respJSON.ID)
