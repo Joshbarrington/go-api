@@ -39,7 +39,7 @@ func testHttpRequest(collection *mongo.Collection, json []byte) (*httptest.Respo
 
 func TestUserPost(t *testing.T) {
 
-	// var respJSON PostResponseJSON
+	var respJSON PostResponseJSON
 
 	testJSON, err := json.Marshal(map[string]string{
 		"username":  "test",
@@ -58,13 +58,12 @@ func TestUserPost(t *testing.T) {
 	log.Printf("[Response] status code: %d", writer.Code)
 	log.Printf("[Response] contents: %s", string(body))
 
-	// err = json.NewDecoder(resp.Body).Decode(&respJSON)
+	err = json.NewDecoder(resp.Body).Decode(&respJSON)
 
-	// if err != nil {
-	// 	log.Println(err)
-	// }
-
-	// log.Printf("[Response] respJSON struct contents: %s", respJSON)
+	if err != nil {
+		log.Println(err)
+	}
 
 	assert.Equal(t, 200, writer.Code)
+	assert.NotEmpty(t, respJSON.ID)
 }
