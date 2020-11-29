@@ -22,3 +22,7 @@ run-tests:
 dev:
 	@printf "$(TIMESTAMP) $(YEL)Running Go dev server...$(NC)\n"
 	go run httpd/main.go
+
+docker-compose-up:
+	@printf "$(TIMESTAMP) $(YEL)Launching Go API and MongoDB...$(NC)\n"
+	docker-compose run api sh -c 'make run-tests'

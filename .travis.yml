@@ -1,8 +1,9 @@
-# language:
-#   - go
+language:
+  - go
 
 services:
   - docker
 
 script:
-  - docker-compose run api sh -c 'cd httpd/routes && go test'
+  - make lint
+  - make docker-compose-up
