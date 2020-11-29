@@ -57,7 +57,7 @@ func TestUserPost(t *testing.T) {
 		log.Println(err)
 	}
 
-	writer, resp := testHTTPRequest(collection, testJSON, "POST", "/users")
+	writer, resp := testHTTPRequest(collection, testJSON, "POST", "/user")
 	err = json.NewDecoder(resp.Body).Decode(&respJSON)
 
 	if err != nil {
