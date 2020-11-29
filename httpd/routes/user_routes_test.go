@@ -28,10 +28,10 @@ type PostResponseJSON struct {
 	ID string `json:"id"`
 }
 
-func testHTTPRequest(collection *mongo.Collection, json []byte) (*httptest.ResponseRecorder, *http.Response) {
+func testHTTPRequest(collection *mongo.Collection, json []byte, requestType string, endPoint string) (*httptest.ResponseRecorder, *http.Response) {
 	writer := httptest.NewRecorder()
 
-	req, _ := http.NewRequest("POST", "/user", bytes.NewBuffer(json))
+	req, _ := http.NewRequest(requestType, endPoint, bytes.NewBuffer(json))
 	req.Header.Set("Content-type", "application/json")
 
 	router.ServeHTTP(writer, req)
@@ -57,7 +57,7 @@ func TestUserPost(t *testing.T) {
 		log.Println(err)
 	}
 
-	writer, resp := testHTTPRequest(collection, testJSON)
+	writer, resp := testHTTPRequest(collection, testJSON, "POST", "/users")
 	err = json.NewDecoder(resp.Body).Decode(&respJSON)
 
 	if err != nil {
