@@ -25,4 +25,5 @@ dev:
 
 docker-compose-up:
 	@printf "$(TIMESTAMP) $(YEL)Launching Go API and MongoDB...$(NC)\n"
+	-docker-compose rm -fs
 	docker-compose run api sh -c 'make run-tests'

@@ -21,7 +21,8 @@ import (
 const dbName = "userdb"
 const collectionName = "users"
 
-var collection, _ = db.GetMongoDbCollection(dbName, collectionName)
+var client, _ = db.MongoDbConnection()
+var collection, _ = db.GetMongoDbCollection(dbName, collectionName, client)
 var router = SetupRouter(collection)
 
 type PostResponseJSON struct {
@@ -71,7 +72,6 @@ func TestUserPost(t *testing.T) {
 
 	if err != nil {
 		log.Fatal(err)
-
 	}
 
 	assert.Equal(t, 200, writer.Code)

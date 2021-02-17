@@ -32,5 +32,6 @@ func UserPost(collection *mongo.Collection) gin.HandlerFunc {
 
 		id := result.InsertedID.(primitive.ObjectID)
 		c.JSON(200, gin.H{"id": id})
+
 	}
 }
