@@ -25,6 +25,14 @@ var client, _ = db.MongoDbConnection()
 var collection, _ = db.GetMongoDbCollection(dbName, collectionName, client)
 var router = SetupRouter(collection)
 
+type GetResponseJSON struct {
+	ID        string `json:"id"`
+	Username  string `json:"username" binding:"required" bson:"username"`
+	FirstName string `json:"firstname" binding:"required" bson:"firstname"`
+	LastName  string `json:"lastname" binding:"required" bson:"lastname"`
+	Password  string `json:"password" binding:"required" bson:"password"`
+}
+
 type PostResponseJSON struct {
 	ID string `json:"id"`
 }
@@ -39,6 +47,39 @@ func testHTTPRequest(collection *mongo.Collection, json []byte, requestType stri
 	resp := writer.Result()
 
 	return writer, resp
+}
+
+func TestGetUser(t *testing.T) {
+	var respJSON GetResponseJSON
+
+	testData := map[string]string{
+		"username":  "test",
+		"firstname": "test",
+		"lastname":  "test",
+		"password":  "test",
+	}
+
+	testJSON, err := json.Marshal(testData)
+
+	if err != nil {
+		log.Println(err)
+	}
+
+	testHTTPRequest(collection, testJSON, "POST", "/user")
+	writer, resp := testHTTPRequest(collection, testJSON, "GET", "/user/test")
+
+	err = json.NewDecoder(resp.Body).Decode(&respJSON)
+
+	if err != nil {
+		log.Println(err)
+	}
+
+	log.Printf("[Response] username: %s", respJSON.Username)
+
+	assert.Equal(t, 200, writer.Code)
+	assert.NotEmpty(t, respJSON.Username)
+	assert.Equal(t, "test", respJSON.Password)
+
 }
 
 func TestUserPost(t *testing.T) {

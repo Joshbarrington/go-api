@@ -23,6 +23,11 @@ dev:
 	@printf "$(TIMESTAMP) $(YEL)Running Go dev server...$(NC)\n"
 	go run httpd/main.go
 
+build:
+	@printf "Project is going to be rebuilt\n"
+	docker-compose build
+	@printf "Build over\n"
+
 docker-compose-up:
 	@printf "$(TIMESTAMP) $(YEL)Launching Go API and MongoDB...$(NC)\n"
 	-docker-compose rm -fs
